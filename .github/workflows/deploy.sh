@@ -20,6 +20,16 @@ jobs:
           username: ${{ secrets.GCP_SERVER_USERNAME }}
           key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           script: |
+            # Check if the directory exists. If not, clone it.
+            if [ ! -d "~/hng-stage-1" ]; then
+            git clone https://github.com/B-Nockk/hng-stage-1.git ~/hng-stage-1
+            fi
+
+            # Navigate to the code
             cd ~/hng-stage-1
-            git pull og main
+
+            # Pull the latest changes
+            git pull origin main
+
+            # Deploy the application
             docker compose up -d --build
