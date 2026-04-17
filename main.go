@@ -25,6 +25,11 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]string{"message": "API is running"})
 	})
 
+	mux.HandleFunc("/ci-cd", func(w http.ResponseWriter, r *http.Request){
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(map[string]string{"message": "CI - CD worked fine"})
+	})
+
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]string{"message": "healthy"})
